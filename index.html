@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+  <title>Combat Strike</title>
+  <style>
+body {
+      background-color: lightblue;
+      background-image: url("plan.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover; 
+    }
+  h1, h2, p{
+    color: red;
+    text-align: center;
+  }
+  
+  footer {
+    color: red;
+    padding: 30px;
+    border: 20px;
+    border-radius: 30px;
+    
+  }
+  
+  textarea {
+  width: 339px;
+  height: 300px;
+  padding: 0px;
+  border-radius: 20px;
+  box-shadow: 5px 4px 3px;
+  margin-right: 20px;
+  background-image: black;
+  background-image: url("blood2.jpg");
+  color: burlywood;
+  display:none;
+  font-display: green;
+}
+
+.character {
+  border-radius: 20px; 
+  width: 110px;
+  height: 70px;
+  box-shadow: 3px 4px 2px;
+  color: burlywood;
+  background-color: darkred;
+  
+}
+
+#game-container {
+  display: flex;
+  justify-content: space-between;
+  display:none;
+  
+}
+
+#log {
+  margin-top: 20px;
+  margin-right: 200px;
+}
+
+#type {
+  display: none;
+  border-radius:10px;
+  margin-left:139px;
+  box-shadow:6px 9px 10px;
+  color: darkred !important;
+  
+}
+#intro {
+    
+}
+#screen {
+    display:none;
+  
+  
+  
+}
+
+
+#loader{
+border: 8px solid #f3f3f3;
+border-top: 8px solid #3498db;
+border-radius: 50%;
+width: 50px;
+height: 50px;
+animation: spin 1s linear infinite;
+align:center;
+display:none;
+}
+
+@keyframes spin
+{
+0% { 
+  transform: rotate(0deg); 
+}
+100% { 
+  transform: rotate(360deg);
+}
+  
+}
+
+.work{ 
+    box-shadow : 4px 3px 4px; 
+    border-radius:10px;
+    width:50px;
+    height:30px;
+    margin-left: 90px;
+    margin-top: 20px;
+    display: none;
+    color:green;
+}
+.work2{
+    box-shadow : 4px 3px 4px;
+    border-radius:10px;
+    margin-left:190px;
+    width:50px;
+    height:30px;
+    display: none;
+    margin-bottom: 20px;
+    color: red;
+    
+}
+#name {
+  border-radius: 10px;
+  box-shadow: 2px 3px 3px;
+  color: darkred;
+  color:red;
+  background-color: black;
+}
+#safe {
+  border-radius: 10px;
+  box-shadow: 2px 3px 3px;
+  color:darkred;
+  background-color: black;
+}
+
+select option {
+  border-radius: 90px;
+  box-shadow: 7px 8px 10px;
+  color: darkred;
+  background-color: darkred !important;
+  padding:60px;
+}
+#type2{
+  border-radius: 10px;
+  display: none;
+  margin-left: 255px;
+}
+#firstSL{
+  color:darkred;
+  display:none;
+}
+#secondSL{
+  margin-left: 90px;
+  color: darkred;
+  display:none;
+  
+}
+#firstN{
+  color: darkgreen;
+ /* border-radius: 0px;*/
+  background-color: darkred;
+  width: 20px;
+  height: 25px;
+  display:none;
+  
+}
+#firstS{
+  color: darkgreen;
+ /* border-radius: 0px;*/
+  background-color: darkred;
+  width: 15px;
+  height: 15px;
+  display: none;
+  
+}
+
+#health-bar-container2 {
+  width: 150px;
+  height: 10px;
+  border: 1px solid #333;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-left: 190px;
+  margin-top: 10px; /*Adjusted margin to prevent overlap */
+display: none;
+}
+
+#health-bar2{
+  height: 100%;
+  background-color: red;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+  display:none;
+}
+
+#health-bar-container {
+  width: 150px;
+  height: 10px;
+  border: 1px solid #333;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 10px; /* Adjusted margin to prevent overlap */
+  display: none;
+}
+
+#health-bar {
+  height: 100%;
+  background-color: green;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+  display: none;
+}
+
+#turn {
+  color:darkred;
+  margin-left: 205px;
+  margin-bottom: 90px;
+  height: 90px;
+  display:none;
+  
+}
+#TurnValue {
+  color:darkgreen;
+  display: none;
+  width:15px;
+  background-color: darkred;
+}
+
+
+
+
+nav {
+  position: fixed;
+  top:0;
+  z-index: 100;
+  color:red;
+  
+}
+nav a {
+  color: darkred;
+  display: inline;
+}
+
+
+.lin{
+  position:fixed;
+  z-index: 100;
+  margin-left: 150px;
+  margin-bottom: 90px;
+  display: none;
+  color: darkred;
+}
+  </style>
+</head>
+<body>
+  <br>
+  
+<nav>
+    <ul>
+      <li class="dropdown">
+        <a href="#" class="dropbtn" ></a>
+        <div class="dropdown-content">
+          <strong><a href="#" onclick="launchFullscreen(document.documentElement)">Go Fullscreen</a></strong>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <strong><div class="lin">👈 click for fullscreen</div></strong>
+
+
+  
+
+<audio id = "audio1" autoplay controls="false" loop>
+  <source src="abad.mp3" type="audio/mp3">
+</audio>
+  <div id="loader"></div>
+  <label id="turn"><strong>Used skill:</strong>
+  </label>
+  <input id = "TurnValue" readonly>
+  
+  <br>
+ <strong id = "firstSL">Skillpoints:</strong><input type = "number" id = "firstN" readonly>
+ <strong id = "secondSL">Healpoints:</strong><input type = "number" id = "firstS" readonly><br>
+ 
+<div id="health-bar-container">
+   <div id="health-bar"></div>
+ </div>
+ <br>
+   <div id="health-bar-container2">
+       <div id="health-bar2"></div>
+       <br>
+       </div>
+  <textarea id="screen" readonly>
+  </textarea><br>
+  
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <div id="game-container">
+    <div>
+      <br>
+      <button class="character" onclick="normal()">Attack</button>
+      <button class="character" onclick="special()">Special Attack</button>
+      <button class="character" onclick="healing()">Healing</button>
+    </div>
+  </div>
+
+  <div id="log"></div>
+
+  <select id="type" onchange="handleSelect()">
+    <option value="death">Death</option>
+    <option value="slice">Slice</option>
+    <option value="Flicker">Flicker</option>
+    <option value="Meteor">Meteor</option>
+    <option value="Drain">Drain</option>
+    <option value="Ice">Ice</option>
+    <option value="fira">fira</option>
+    <option value="Quake">Quake</option>
+    <option value="Light">Light</option>
+    <option value="dark">dark</option>
+  </select>
+  
+  <select id = "type2" onchange="healopt()">
+    <option value = "pizza">Pizza</option>
+    <<option value="meat">meat</option>
+    <<option value="apple">apple</option>
+    <<option value="coconut">coconut</option>
+    <<option value="burger">burger</option>
+    <<option value="sandwitch">sandwitch</option>
+    <<option value="cream">cream</option>
+  </select>
+
+  <div id="intro">
+    <h1>Combat Strike</h1>
+    <h2>Rules</h2>
+    <p>Your aim is to defeat your opponent.</p>
+    <p>If your HP reaches 0, you lose,  likewise your opponent.
+    Input your name first then
+    Press start to begin and end to quit</p>
+    
+    <form id = "lot" onsubmit="run(); return false;">
+      <input type = "text" id = "name" placeholder="Enter your name" required>
+      <button id = "safe">Save</button>
+    <br>
+    <br>
+    <button class="work" onclick="showloader()">start</button>
+    <button class="work2" onclick="Work2()">end</button><br>
+    <br>
+    <br>
+    </form>
+      <footer><u><strong>&copy Nicholas Johnson all rights reserved </strong></u></footer>
+    
+  </div>
+  
+  
+<script>
+
+
+
+let audio3 = new Audio("lack.mp3");
+
+window.onload = function(){
+  audio = document.getElementById("audio1");
+  audio.controls = false;
+}
+
+//Music
+let soundArray = ["Weak.m4a","shao.mp3","Useless.m4a","A.mp3","B.mp3","E.mp3","F.mp3","ll.mp3"];
+  
+
+function sound(){
+  
+  randomSound = Math.floor(Math.random()*soundArray.length)
+    var audio = new Audio(soundArray[randomSound]);
+    audio.play();
+    return soundArray;
+}
+//music
+function music() {
+    var audio = document.getElementById("audio1");
+    audio.play();
+    audio.volume = 0.25;
+    audio.controls = false;
+    return audio;
+}
+//engine
+    function run(){
+      let run3 = document.getElementsByClassName("work")[0];
+      let run4 = document.getElementsByClassName("work2")[0];
+      music();
+      run3.style.display = 'block';
+      run4.style.display = 'inline-block';
+      
+    }
+     let AiHp = 1000;
+    let UserHp = 1000;
+    let skillPoints = 10;
+    let healpoints = 5;
+    let skillPoints2 = 10;
+    let healpoints2 = 5;
+    //display health
+      let min = 1000;
+      let max = 1000;
+      let userHealthPercentage = (UserHp / min) * 100;
+      let aiHealthPercentage = (AiHp / max) * 100;
+    
+    
+    
+     randomName = ["Lily", "Daniel", "Loomy", "Peet", "Stell", "Leyna"];
+   chosenName = Math.floor(Math.random() * randomName.length);
+   
+  
+//normal attack
+    
+    function normal() {
+      
+      sound();
+      
+      let c = 1;
+      let d = 100;
+      norm = Math.floor(Math.random()*(d - c+1)+c);
+      
+      Ailog = "\n\n\n\n\n\n\n\n\n\n\nYou damaged "+ randomName[chosenName]+":"+norm;
+        let elements = [40, 111, 32, 50, 43, 90, 33, 43, 12, 70, 32];
+        let randomIndex = Math.floor(Math.random() * elements.length);
+        AiDamage = elements[randomIndex];
+        let userLog = `\n\n\n\n\n\n\n\n\n\n\n${randomName[chosenName]} damaged you: ${AiDamage}`;
+        AiHp -= norm;
+       
+        let display2 = document.getElementById("screen");
+        updateHealthDisplay();
+        display2.value = Ailog;
+        setTimeout(function () {
+            updateHealthDisplay();
+            AiChoice();
+            
+        }, 3000);
+        
+    }
+//special attack
+    function special() {
+       let pick = document.getElementById("type");
+        pick.style.display = 'block';
+        pick.focus();
+    }
+
+  let damage2 = [222,111,150,121,134,156,166,200];
+
+  let bankaiSkill = 0;
+  
+  let turn3 = document.getElementById("TurnValue");
+    function handleSelect() {
+      bankaiSkill += 1;
+      turn3.value = bankaiSkill;
+      
+      sound();
+      skillPoints -= 1;
+      if(skillPoints < 0){
+        Swal.fire({
+          icon:'info',
+          text:'You are out of skill points',
+          confirmButton:true,
+          confirmButtonColor:'red'
+        });
+      }else{
+      let pick3 = document.getElementById("type");
+     //damage2 = [222,111,150,121,134,156,166,200]
+     let randomDamage2 = Math.floor(Math.random()*damage2.length);
+      
+      Ailog2 = "\n\n\n\n\n\n\n\n\n\n\nYou used "+pick3.value+" damaged "+ randomName[chosenName]+":"+damage2[randomDamage2];
+        AiHp -= damage2[randomDamage2];
+        
+        let pick = document.getElementById("type");
+        //updateHealthDisplay()
+        pick.style.display = 'none';
+        //alert("Selected option: " + pick.value);
+      let skillInput = document.getElementById("firstN");
+       skillInput.value = skillPoints;
+     
+        let display1 = document.getElementById("screen");
+        updateHealthDisplay();
+        display1.value = Ailog2;
+        
+        setTimeout(function () {
+          //AiChoice();
+            updateHealthDisplay();
+            AiChoice();
+            
+        }, 3000);
+    }
+    }
+    //healing
+    function healing(){
+      let sas = document.getElementById("type2");
+      sas.style.display = 'block';
+      sas.focus();
+    }
+
+let damage3 = [222,111,150,121,134,156,166,200];
+
+    function healopt(){
+      sound();
+      healpoints -= 1;
+      if(healpoints < 0){
+        Swal.fire({
+          icon:'info',
+          text:'You are out of heal points',
+          confirmButton:true,
+          confirmButtonColor:'red'
+        });
+      }else{
+      let pick2 = document.getElementById("type2");
+      pick2.style.display = 'none';
+      
+      randomDamageIndex2 = Math.floor(Math.random()*damage3.length);
+      
+        
+      userHealLog = "\n\n\n\n\n\n\n You ate "+pick2.value+" healed"+": "+damage3[randomDamageIndex2];
+        
+        UserHp += damage3[randomDamageIndex2];
+        
+      let healInput = document.getElementById("firstS");
+        healInput.value = healpoints;
+      
+        let display3 = document.getElementById("screen");
+          updateHealthDisplay();
+        display3.value = userHealLog;
+        //alert(userHealLog);
+        
+        setTimeout(function(){
+// Update HP values to ensure they don't exceed 1000
+          UserHp = Math.min(UserHp, min);
+          
+        updateHealthDisplay();
+          AiChoice();
+          
+        },3000);
+    }
+    }
+
+
+function updateHealthDisplay() {
+      let real = document.getElementById("name").value;
+      let screen = document.getElementById("screen");
+      let userBar = document.getElementById("health-bar");
+      let aiBar = document.getElementById("health-bar2");
+    
+      screen.value = "                              " + randomName[chosenName] + ":" + AiHp + "\n" + "                              " + real + ":" + UserHp + "\n\n\n\n\n\n\n Your turn";
+    
+      // Calculate the width percentage for the health bars
+      userHealthPercentage = (UserHp / min) * 100;
+      aiHealthPercentage = (AiHp / max) * 100;
+    
+      // Update the width of the health bars
+      userBar.style.width = userHealthPercentage + "%";
+      aiBar.style.width = aiHealthPercentage + "%";
+    }
+    
+//display intro
+    function Work() {
+        let a = document.getElementById("intro");
+        let b = document.getElementById("game-container");
+        let c = document.getElementById("screen");
+        let x = document.getElementById("firstSL");
+        let y = document.getElementById("secondSL");
+        let xy = document.getElementById("firstN");
+        let xz = document.getElementById("firstS");
+        let userBar = document.getElementById("health-bar-container");
+        let userBar2 = document.getElementById("health-bar");
+        let aiBar = document.getElementById("health-bar-container2");
+        let aiBar2 = document.getElementById("health-bar2");
+        let turnn = document.getElementById("turn");
+        let turn2 = document.getElementById("TurnValue");
+        turn3.value= bankaiSkill;
+        turn2.style.display = "inline";
+        turnn.style.display = "inline";
+        a.style.display = "none";
+        b.style.display = "block";
+        c.style.display = "block";
+        x.style.display = "inline-block";
+        y.style.display = "inline-block";
+        xy.style.display = "inline-block";
+        xz.style.display = "inline-block";
+        userBar.style.display = "block";
+        userBar2.style.display = "block";
+        aiBar.style.display = "block";
+        aiBar2.style.display = "block";
+        xy.value = skillPoints;
+        xz.value = healpoints;
+        conf();
+
+    }
+//close
+    function Work2() {
+        Swal.fire({
+          title:'Abort',
+          text :'Are you sure you want to quit?',
+          icon :'Goodbye',
+          showCancelButton:true,
+          confirmButtonColor:'red',
+          confirmButtonText:'yes',
+          cancelButtonColor:'green',
+        }).then((result) => {
+          if(result.isConfirmed){
+            window.close();
+          }
+        });
+    }
+        
+    
+//loader
+    function showloader() {
+      
+        Swal.fire({
+        title: 'Searching for Players',
+        html: 'Please wait',
+        icon: 'info',
+        showCancelButton: false,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        timer: 4000,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+        willClose: () => {
+          Swal.fire({
+            title: `Players Found:${randomName[chosenName]}`,
+            text: 'You are ready to start the game.',
+            icon: 'success',
+            confirmButtonText: 'Start Game'
+          }).then((result) => {
+            if(result.isConfirmed){
+            Work();
+            }else{
+              
+            }
+          });
+        }
+      });
+        setTimeout(function () {
+            hideLoader();
+        }, 4000);
+        document.getElementById("loader").style.display = "flex";
+    }
+
+    function hideLoader() {
+        document.getElementById("loader").style.display = "none";
+
+    }
+    
+  //check if fullScreen is allowed
+function launchFullscreen(element) {
+   if (element.requestFullscreen) {
+     element.requestFullscreen();
+   } else if (element.mozRequestFullScreen) {
+     element.mozRequestFullScreen();
+   } else if (element.webkitRequestFullscreen) {
+     element.webkitRequestFullscreen();
+   } else if (element.msRequestFullscreen) {
+     element.msRequestFullscreen();
+   }
+   let lap = document.getElementsByClassName("dropdown-content")[0];
+   let lap2 = document.getElementsByClassName("lin")[0];
+   lap.style.display = "none";
+   lap2.style.display = "none";
+   
+ }
+    
+    
+//style alert
+function conf() {
+      Swal.fire({
+        title: 'Welcome',
+        text: 'Your aim is to defeat your opponent. There are several waves to go through, and only the strongest will survive. Are you ready?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, I am ready!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          audio = new Audio("shao.mp3");
+          audio.play();
+          updateHealthDisplay();
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Are you sure you want to abort?',
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonColor: 'red',
+            cancelButtonColor: 'green'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.close();
+            } else {
+                  Swal.fire({
+                  title: 'Welcome',
+                  text: 'Your aim is to defeat your opponent. There are several waves to go through, and only the strongest will survive. Are you ready?',
+                  icon: 'info',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, I am ready!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      audio = new Audio("shao.mp3");
+                      audio.play();
+                      updateHealthDisplay();
+                      valid = true;
+                    }
+                });
+            
+            }
+          });
+        }
+      });
+    }
+  
+//Ai
+    function Aiplay() {
+      
+      let begin = 1;
+      let end1 = 160;
+      let AiDamage2 = Math.floor(Math.random()*(end1 - begin + 1) + 1);
+       
+        UserHp -= AiDamage2;
+        
+        let plan = document.getElementById("screen");
+        plan.value =  `\n\n\n\n\n\n\n\n\n\n\n${randomName[chosenName]} attacked damaged you: ${AiDamage2}`;
+        setTimeout(function () {
+            updateHealthDisplay();
+            check();
+        }, 2000);
+    }
+
+    function aiSkills() {
+      skillPoints2 -= 1;
+      if(skillPoints2 < 0){
+        Swal.fire({
+        icon: 'info',
+        text: `${randomName[chosenName]} is out of skill points`,
+        timer: 1000
+      }).then((result) => {
+        updateHealthDisplay();
+      });
+      }else{  
+    skills = ['slice', 'dark', 'flare', 'sap', 'meteor', 'flicker'];
+    damage = [100, 110, 111, 145, 169, 120];
+    combined = skills.concat(damage);
+   let randomSkillIndex = Math.floor(Math.random() * skills.length);
+   let randomDamageIndex = Math.floor(Math.random() * damage.length);
+
+      
+        UserHp -= damage[randomDamageIndex];
+        
+        aiSkillLog = `\n\n\n\n\n\n ${randomName[chosenName]} used ${skills[randomSkillIndex]} damaged you: ${damage[randomDamageIndex]}`;
+        let plan2 = document.getElementById("screen");
+        plan2.value = aiSkillLog;
+        setTimeout(function () {
+            updateHealthDisplay();
+            check();
+        }, 2000);
+        
+    }
+}
+    function aiHeal() {
+      healpoints2 -= 1;
+      if(healpoints2 < 0){
+        Swal.fire({
+          icon:'info',
+          text:`${randomName[chosenName]} is out of heal points`,
+          timer:1000
+        }).then((result) => {
+          updateHealthDisplay();
+        });
+        
+      }else{
+       let test2 = 1;
+       let test3 = 200;
+       let test = Math.floor(Math.random()*(test3 - test2 + 1) + 1);
+        AiHp += test;
+        food = ["apple","meat","pizza","coconut"];
+        randomFood = Math.floor(Math.random()*food.length);
+        aiHealLog = `\n\n\n\n\n\n ${randomName[chosenName]} ate ${food[randomFood]} healed: ${test}`;
+        
+      let plan3 = document.getElementById("screen");
+        plan3.value = aiHealLog;
+        setTimeout(function() {
+// Update HP values to ensure they don't exceed 1000
+          AiHp = Math.min(AiHp, max);
+          
+          updateHealthDisplay();
+          check();
+        }, 3000);
+    }
+    
+    }
+    function AiChoice() {
+      if(AiHp <= 0){
+        check();
+        return;
+      }
+      let start = 1;
+      let end = 3;
+      let choice = Math.floor(Math.random() * (end - start+1) + start);
+      if (choice == 1) {
+        Aiplay();
+      } else if (choice == 2) {
+        aiSkills();
+      } else if (choice == 3) {
+        aiHeal();
+      }
+      
+      
+    }
+    function continue1(){
+      audio = new Audio("shao.mp3");
+      audio.play();
+      updateHealthDisplay();
+    }
+
+let additionalHpInWave3 = 1000; 
+  
+  let currentWave = 1;
+  let bankai = 1;
+  let gameOver = new Audio("over.mp3");
+  let win = new Audio("final.mp3");
+function check() {
+    // Check if player's HP is zero
+    if (UserHp <= 0) {
+      UserHp = 0;
+      updateHealthDisplay();
+      luck3 = music();
+      // Show game over message
+      Swal.fire({
+        icon: 'info',
+        title: 'GAME OVER',
+        text: 'Play again?',
+        cancelButton: true,
+        cancelButtonColor: 'red',
+        confirmButtonText: 'continue',
+        didOpen: () => {
+          luck3.pause();
+          audio3.pause();
+          gameOver.play();
+        }
+        
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Reset game variables for a new game
+          UserHp = 1000;
+          AiHp = 1000;
+          min = 1000;
+          max = 1000;
+          gameOver.pause();
+          gameOver.currentTime = 0;
+          luck2 = music();
+          
+            audio3.pause();
+            luck2.currentTime = 0;
+            luck2.play();
+          
+          skillPoints = 10;
+          healpoints = 5;
+          updateHealthDisplay();
+          continue1();
+      soundArray = ["Weak.m4a","shao.mp3","Useless.m4a","A.mp3","B.mp3","E.mp3","F.mp3","ll.mp3"];
+        bankai = 1;
+        bankaiSkill = 0;
+        currentWave = 1;
+        
+        damage3 = [222,111,150,121,134,156,166,200];
+       damage2 = [222,111,150,121,134,156,166,200];
+        skillPoints2 = 10;
+        healpoints2 = 5;
+        
+          
+        }
+      });
+    }
+
+
+  if (UserHp < 300) {
+    if(bankai >= 1 ){
+      Swal.fire({
+        icon: 'info',
+        text: 'Your opponent wouldn\'t be defeatable at this rate. You have no choice but to use your last skill BANKAI',
+        cancelButton: true,
+        cancelButtonColor: 'red',
+        confirmButtonText: 'Use',
+        confirmButtonColor: 'green'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          bankai -= 1;
+          audio2 = new Audio("Bankai.mp3");
+          luck = music();
+          luck.pause();
+          
+
+        // Set an event listener for the timeupdate event
+        audio3.addEventListener('timeupdate', function() {
+       // Check if the audio is within the last 9 seconds of its duration
+        if (audio3.currentTime > audio3.duration - 19) {
+        // Reset the playback to the beginning
+         audio3.currentTime = 0;
+        }
+});
+          
+          audio3.play();
+          UserHp = 1000;
+          audio2.play();
+          skillPoints = 10;
+          healpoints = 5;
+          
+          damage2 = [200,250,219,113,222,280,230,160,218];
+          damage3 = [290,300,340,200,400,350,280,170,210,111,322];
+          
+          soundArray = ["kk.mp3","mm.mp3","nn.mp3","oo.mp3","ss.mp3"];
+          
+          updateHealthDisplay();
+        }
+      });
+      
+      
+    }else{
+      
+    }
+  }
+  
+    // Check if AI's HP is zero
+    if (AiHp <= 0) {
+      AiHp = 0;
+      updateHealthDisplay();
+  
+      // Start the next wave
+      startNextWave();
+    }
+  
+  function startNextWave() {
+  if (currentWave < 3) {
+    Swal.fire({
+      icon: 'success',
+      text: currentWave < 3 ? `Wave ${currentWave} completed +3(skills, heal points). Next wave` : '',
+      confirmButtonText: currentWave < 3 ? 'Move' : '',
+      didOpen: () => {
+        win.play();
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        win.pause();
+        win.currentTime = 0;
+        mim = 1000;
+        max = 2000;
+        currentWave++;
+      console.log(max);
+        if (currentWave == 2) {
+          AiHp = 1000 + additionalHpInWave3;
+        } else if (currentWave == 3) {
+          max = 3000;
+          AiHp = 2000 + additionalHpInWave3;
+          console.log(max);
+        } else if (currentWave > 3) {
+          showVictoryMessage();
+        } else {
+          updateHealthDisplay();
+          startNextWave();
+        }
+  
+        skillPoints += 3;
+        healpoints += 3;
+        healpoints2 = 5;
+        skillPoints2 = 10;
+        userHealthPercentage = (UserHp / mim) * 100;
+        aiHealthPercentage = (AiHp / max) * 100;
+        continue1();
+      }
+    });
+  } else {
+    showVictoryMessage();
+  }
+}
+if (bankaiSkill == 20 || bankaiSkill == 21 || bankaiSkill == 22 || bankaiSkill== 24)  {
+    if(AiHp > 0){
+      Swal.fire({
+        icon: 'info',
+        text: 'Bankai technique, Cast drain, usage:1',
+        confirmButtonColor: 'blue'
+    
+      }).then((result) => {
+        if (result.isConfirmed) {
+          bankaiSkill = 0;
+          bankaiSkill += 1;
+          console.log(bankaiSkill);
+          AiHp -= 1000;
+          updateHealthDisplay();
+          Swal.fire({
+            icon:'info',
+            title:`You damaged ${randomName[chosenName]} 1000`,
+            timer:2000
+          }).then((result) => {
+            if(AiHp <= 0){
+              AiHp = 0;
+              updateHealthDisplay();
+              startNextWave();
+            }else{
+              
+            }
+          });
+        } else {
+    
+        }
+      });
+    }else{
+      
+    }
+}else if(bankaiSkill == 25){
+  Swal.fire({
+    icon:'info',
+    text:'You lost the chance to use bankai special skill',
+    timer: 2000
+    
+  }).then(() => {
+    
+  });
+}
+}
+
+
+function showVictoryMessage() {
+    let nop = new Audio("final.mp3");
+    let tan = music();
+    Swal.fire({
+      icon: 'success',
+      text: 'Congratulations! You defeated all waves. You are the ultimate champion!',
+      showCancelButton:true,
+      confirmButtonText: 'Play Again',
+      confirmButtonColor:'green',
+      cancelButtonText: 'No',
+      cancelButtonColor: 'red',
+      didOpen: () => {
+         nop.play();
+         
+         if(!tan.paused){
+           tan.pause();
+         }
+         if(!audio3.paused){
+         audio3.pause();
+         }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Reset game variables for a new game
+        updateHealthDisplay();
+        currentWave = 1;
+        bankaiSkill = 0;
+        bankai = 1;
+        UserHp = 1000;
+        AiHp = 1000;
+        min = 1000;
+        max = 1000;
+        skillPoints = 10;
+        healpoints = 5;
+        updateHealthDisplay();
+        continue1();
+        tan.play();
+        tan.currentTime = 0;
+        damage3 = [222, 111, 150, 121, 134, 156, 166, 200];
+        damage2 = [222, 111, 150, 121, 134, 156, 166, 200];
+        soundArray = ["Weak.m4a","shao.mp3","Useless.m4a","A.mp3","B.mp3","E.mp3","F.mp3","ll.mp3"];
+        skillPoints2 = 10;
+        healpoints2 = 5;
+      } else {
+        window.close();
+      }
+    });
+  }
+
+
+
+</script>
+</body>
+</html>
